@@ -16,14 +16,45 @@ int main() {
     // posicionando os navios
 
     // vertical
-    tabuleiro[6][3] = 3;
-    tabuleiro[7][3] = 3;
-    tabuleiro[8][3] = 3;
+
+    for (int i = 0; i < 3; i++) {
+        tabuleiro[6 + i][3] = 3;
+    }
+
+    //tabuleiro[6][3] = 3;
+    //tabuleiro[7][3] = 3;
+    //tabuleiro[8][3] = 3;
             
     // horizontal
-    tabuleiro[1][6] = 3;
-    tabuleiro[1][7] = 3;
-    tabuleiro[1][8] = 3;
+
+    for (int i = 0; i < 3; i++) {
+        tabuleiro[1][6 + i] = 3;
+    }
+
+    //tabuleiro[1][6] = 3;
+    //tabuleiro[1][7] = 3;
+    //tabuleiro[1][8] = 3;
+
+    
+    // diagonal principal
+
+    for (int k = 0; k < 3; k++) {
+        tabuleiro[k][k] = 3;
+    }
+
+    //tabuleiro[0][0] = 3;
+    //tabuleiro[1][1] = 3;
+    //tabuleiro[2][2] = 3;
+
+    // diagonal secundária
+    for (int k = 0; k < 3; k++) {
+        tabuleiro[2 + k][7 - k] = 3;
+    }
+
+    //tabuleiro[2][7] = 3;
+    //tabuleiro[3][6] = 3;
+    //tabuleiro[4][5] = 3;
+
 
 
     // espaço inicial para alinhar com os números das linhas
