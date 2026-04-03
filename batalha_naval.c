@@ -3,6 +3,17 @@
 int main() {
     int tabuleiro[10][10];
 
+    int cruz[5][5];
+    int cone[5][5];
+    int octaedro[5][5];
+
+    // meio
+    int linhaCruz = 5, colunaCruz = 5;
+    // cima / esquerda
+    int linhaCone = 2, colunaCone = 2;
+    // embaixo / direita
+    int linhaOctaedro = 7, colunaOctaedro = 7;
+
     char linha[10] = {'A', 'B','C', 'D','E', 'F','G', 'H','I', 'J',};
 
 
@@ -55,6 +66,142 @@ int main() {
     //tabuleiro[3][6] = 3;
     //tabuleiro[4][5] = 3;
 
+
+    // habilidades
+
+    // cone
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+
+            // topo do cone - limita a metade superior
+            // lado esquerdo cresce
+            // lado direito cresce
+            if (i <= 2 && j >= 2 - i && j <= 2 + i) {
+                cone[i][j] = 1;
+            } else {
+                cone[i][j] = 0;
+            }
+        }
+    }
+
+    // DEBUG - visulizar matriz cone
+    /* for (int i = 0; i < 5; i++) {
+         for (int j = 0; j < 5; j++) {
+            printf("%d  ", cone[i][j]);
+        }
+        printf("\n");
+     }*/
+
+    // posicionar cone no tabuleiro
+
+    for(int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+
+            if (cone[i][j] == 1) {
+                // converte as coordenadas
+                int linhas = linhaCone + (i - 2);
+                int colunas = colunaCone + (j - 2);
+
+                // verifica se está dentro do tabuleiro
+                if (linhas >= 0 && linhas < 10 && colunas >= 0 && colunas < 10) {
+
+                    // nao sobrescrever o navio
+                    if (tabuleiro[linhas][colunas] == 0) {
+
+                        tabuleiro[linhas][colunas] = 5;
+                    }
+                }
+            }
+        }
+    }
+
+
+    // cruz
+
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+
+            // linha do meio
+            // coluna do meio
+            if (i == 2 || j == 2) {
+                cruz[i][j] = 1;
+            } else {
+                cruz[i][j] = 0;
+            }
+        }
+    }
+
+    // DEBUG - visualizar matriz cruz
+    /* for (int i = 0; i < 5; i++) {
+         for (int j = 0; j < 5; j++) {
+            printf("%d  ", cruz[i][j]);
+        }
+        printf("\n");
+     }*/
+
+    // posicionar a cruz no tabuleiro
+
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+
+            if (cruz[i][j] == 1) {
+                int linhas = linhaCruz + (i - 2);
+                int colunas = colunaCruz + (j - 2);
+
+                if (linhas >= 0 && linhas < 10 && colunas >= 0 && colunas < 10) {
+
+                    if (tabuleiro[linhas][colunas] == 0) {
+                        tabuleiro[linhas][colunas] = 5;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    // octaedro
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+
+            // parte de cima até o meio
+            // vai expandindo
+
+            // parte de baixo depois do meio
+            //comeca a fechar
+            if ((i <= 2 && j >= 2 - i && j <= 2 + i ) || (i > 2 && j >= i - 2 && j <= 6 - i)) {
+                octaedro[i][j] = 1;
+            } else {
+                octaedro[i][j] = 0;
+            }
+        }
+    }
+
+    // DEBUG - visualizar matriz octaedro
+    /* for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            printf("%d  ", octaedro[i][j]);
+        }
+         printf("\n");
+     }*/
+
+    // posicionar octaedro no tabuleiro
+    for (int i = 0; i < 5; i ++) {
+        for (int j = 0; j < 5; j++) {
+
+            if (octaedro[i][j] == 1) {
+                int linhas = linhaOctaedro + (i - 2);
+                int colunas = colunaOctaedro + (j - 2);
+
+                if (linhas >= 0 && linhas < 10 && colunas >= 0 && colunas < 10) {
+
+                    if (tabuleiro[linhas][colunas] == 0) {
+                        tabuleiro[linhas][colunas] = 5;
+                    }
+                }
+            }
+        }
+    }
 
 
     // espaço inicial para alinhar com os números das linhas
